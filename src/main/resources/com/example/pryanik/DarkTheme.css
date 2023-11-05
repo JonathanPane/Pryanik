@@ -1,0 +1,25 @@
+.menu-bar{
+    -fx-background-color: #121212;
+}
+.menu-bar .label{
+    -fx-text-fill: #c7bfbf;
+}
+.menu-item{
+    -fx-background-color: #121212;
+}
+.menu{
+    -fx-border-color: #121212;
+}
+.separator{
+    -fx-background-color: #121212;
+}
+.menu-item:hover{
+    -fx-background-color: #565353;
+}
+
+#receipt_output_content_pane{
+    -fx-background-color: #212020;
+}
+.context-menu {
+    -fx-background-color: #121212;
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<AnchorPane fx:id="anchor_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.MainPageController">
+   <children>
+      <MenuBar fx:id="menu_bar" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Файл">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#choose_receipt" text="Открыть..." />
+                  <MenuItem mnemonicParsing="false" onAction="#save_file" text="Сохранить..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#print_file" text="Распечатать..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#close_application" text="Закрыть" />
+               </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Вид">
+              <items>
+                  <Menu mnemonicParsing="false" text="Выбрать тему">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#pick_light_theme" text="Светлая" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                      <MenuItem mnemonicParsing="false" onAction="#pick_dark_theme" text="Темная" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#pick_lavander_theme" text="Лавандовая" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#pick_spring_theme" text="Весенняя" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Единицы измерения">
+                     <items>
+                        <RadioMenuItem mnemonicParsing="false" text="Килограммы" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem mnemonicParsing="false" text="Тонны" />
+                     </items>
+                  </Menu>
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Помощь">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Справка" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <FlowPane fx:id="receipt_output_content_pane" hgap="10.0" layoutY="24.0" prefHeight="376.0" prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+   </children>
+</AnchorPane>
