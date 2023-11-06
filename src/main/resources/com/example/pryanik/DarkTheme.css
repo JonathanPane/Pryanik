@@ -23,3 +23,8 @@
 .context-menu {
     -fx-background-color: #121212;
 }
+.button{
+    -fx-text-fill: white;
+    -fx-background-color: #121212;
+}
+

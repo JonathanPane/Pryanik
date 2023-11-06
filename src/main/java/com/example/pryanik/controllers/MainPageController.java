@@ -13,6 +13,8 @@ import javafx.print.PrinterJob;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
@@ -33,6 +35,14 @@ public class MainPageController {
     @FXML
     private MenuBar menu_bar;
     private Map<String, Double> edited_receipt;
+    @FXML
+    private ToggleGroup metric;
+
+    @FXML
+    private RadioMenuItem metric_kg;
+
+    @FXML
+    private RadioMenuItem metric_tonn;
 
     @FXML
     void initialize(){
@@ -42,13 +52,13 @@ public class MainPageController {
     }
     void show_receipt(Map<String, Double> receipt){
         receipt_output_content_pane.getChildren().clear();
-        for (var entry : receipt.entrySet()){
-            if(entry.getValue() != 0)
+        for (var entry : receipt.entrySet()) {
+            if (entry.getValue() != 0)
                 receipt_output_content_pane.getChildren().add(
-                        new Button(
-                                String.format("%s %.3f кг", entry.getKey(), entry.getValue())
-                        )
-                );
+                            new Button(
+                                    String.format("%s - %.3f кг", entry.getKey(), entry.getValue())
+                            )
+                    );
         }
     }
     @FXML
@@ -89,6 +99,28 @@ public class MainPageController {
             ps.println(PryanikService.map_to_string(edited_receipt));
             ps.close();
         }
+    }
+    @FXML
+    void metric_kg() {
+//        metric_kg.setToggleGroup(metric);
+//        if(edited_receipt != null)
+//            show_receipt(edited_receipt);
+    }
+
+    @FXML
+    void metric_tonn() {
+//        metric_tonn.setToggleGroup(metric);
+//        receipt_output_content_pane.getChildren().clear();
+//        if(edited_receipt != null) {
+//            for (var entry : edited_receipt.entrySet()){
+//                if(entry.getValue() != 0)
+//                    receipt_output_content_pane.getChildren().add(
+//                        new Button(
+//                                String.format("%s %.5f т", entry.getKey(), entry.getValue() / 1000)
+//                        )
+//                );
+//            }
+//        }
     }
     @FXML
     void pick_dark_theme() {

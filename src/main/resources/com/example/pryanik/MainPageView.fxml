@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
@@ -37,9 +38,12 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Единицы измерения">
                      <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Килограммы" />
+                        <RadioMenuItem fx:id="metric_kg" mnemonicParsing="false" onAction="#metric_kg" text="Килограммы">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="metric" />
+                           </toggleGroup></RadioMenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <RadioMenuItem mnemonicParsing="false" text="Тонны" />
+                        <RadioMenuItem fx:id="metric_tonn" mnemonicParsing="false" onAction="#metric_tonn" text="Тонны" toggleGroup="$metric" />
                      </items>
                   </Menu>
               </items>

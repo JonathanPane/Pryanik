@@ -1,6 +1,7 @@
 package com.example.pryanik.services;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ public class PryanikService {
 
     public static Map<String,Double> getReceipt(String user_receipt) throws FileNotFoundException {
         File file = new File(user_receipt);
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(new FileInputStream(file));
             HashMap<String, Double> receipt = new HashMap<>();
             while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
