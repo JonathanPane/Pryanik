@@ -1,0 +1,7 @@
+.receipt-item-view{
+    -fx-background-color: rgb(128, 128, 128);
+    -fx-background-radius: 10px;
+}
+.receipt-item-view .label{
+    -fx-text-fill: black;
+}

@@ -2,8 +2,8 @@ package com.example.pryanik.controllers;
 
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.HelloApplication;
+import com.example.pryanik.UI.ReceiptItemView;
 import com.example.pryanik.services.PryanikService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.print.PageLayout;
@@ -11,19 +11,13 @@ import javafx.print.PageOrientation;
 import javafx.print.Paper;
 import javafx.print.PrinterJob;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Map;
 
 public class MainPageController {
@@ -50,15 +44,26 @@ public class MainPageController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецепта", "*.receipt"));
         menu_bar.prefWidthProperty().bind(anchor_pane.widthProperty());
     }
-    void show_receipt(Map<String, Double> receipt){
+    void show_receipt(Map<String, Double> receipt) throws IOException{
         receipt_output_content_pane.getChildren().clear();
         for (var entry : receipt.entrySet()) {
-            if (entry.getValue() != 0)
-                receipt_output_content_pane.getChildren().add(
-                            new Button(
-                                    String.format("%s - %.3f кг", entry.getKey(), entry.getValue())
+            if (entry.getValue() != 0) {
+                if (metric_kg.isSelected())
+                    receipt_output_content_pane.getChildren().add(
+                            new ReceiptItemView(
+                                    entry.getKey(),
+                                    entry.getValue() + " кг",
+                                    "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
                             )
                     );
+                receipt_output_content_pane.getChildren().add(
+                        new ReceiptItemView(
+                                entry.getKey(),
+                                String.format("%.6f %s",entry.getValue() / 1000 , "т"),
+                                "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
+                        )
+                );
+            }
         }
     }
     @FXML
@@ -93,34 +98,39 @@ public class MainPageController {
     @FXML
     void save_file() throws IOException {
         File file = fileChooser.showSaveDialog(HelloApplication.stage);
+        if(edited_receipt == null)
+            return;
         if(file != null) {
             file.createNewFile();
             PrintStream ps = new PrintStream(new FileOutputStream(file), true);
-            ps.println(PryanikService.map_to_string(edited_receipt));
+            if(metric_kg.isSelected())
+                ps.println(PryanikService.map_to_string(edited_receipt));
+            ps.println(PryanikService.map_to_string_tonn(edited_receipt));
             ps.close();
         }
     }
     @FXML
-    void metric_kg() {
-//        metric_kg.setToggleGroup(metric);
-//        if(edited_receipt != null)
-//            show_receipt(edited_receipt);
+    void metric_kg() throws IOException {
+        metric_kg.setToggleGroup(metric);
+        if(edited_receipt != null)
+            show_receipt(edited_receipt);
     }
 
     @FXML
-    void metric_tonn() {
-//        metric_tonn.setToggleGroup(metric);
-//        receipt_output_content_pane.getChildren().clear();
-//        if(edited_receipt != null) {
-//            for (var entry : edited_receipt.entrySet()){
-//                if(entry.getValue() != 0)
-//                    receipt_output_content_pane.getChildren().add(
-//                        new Button(
-//                                String.format("%s %.5f т", entry.getKey(), entry.getValue() / 1000)
-//                        )
-//                );
-//            }
-//        }
+    void metric_tonn() throws FileNotFoundException {
+        receipt_output_content_pane.getChildren().clear();
+        if(edited_receipt != null) {
+            for (var entry : edited_receipt.entrySet()) {
+                if (entry.getValue() != 0)
+                    receipt_output_content_pane.getChildren().add(
+                            new ReceiptItemView(
+                                    entry.getKey(),
+                                    String.format("%.6f %s",entry.getValue() / 1000 , "т"),
+                                    "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
+                            )
+                    );
+            }
+        }
     }
     @FXML
     void pick_dark_theme() {
