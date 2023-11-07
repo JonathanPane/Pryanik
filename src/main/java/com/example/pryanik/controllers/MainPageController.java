@@ -48,7 +48,6 @@ public class MainPageController {
         receipt_output_content_pane.getChildren().clear();
         for (var entry : receipt.entrySet()) {
             if (entry.getValue() != 0) {
-                if (metric_kg.isSelected())
                     receipt_output_content_pane.getChildren().add(
                             new ReceiptItemView(
                                     entry.getKey(),
@@ -56,7 +55,8 @@ public class MainPageController {
                                     "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
                             )
                     );
-                receipt_output_content_pane.getChildren().add(
+                if(metric_tonn.isSelected())
+                    receipt_output_content_pane.getChildren().add(
                         new ReceiptItemView(
                                 entry.getKey(),
                                 String.format("%.6f %s",entry.getValue() / 1000 , "т"),
@@ -97,27 +97,34 @@ public class MainPageController {
 
     @FXML
     void save_file() throws IOException {
-        File file = fileChooser.showSaveDialog(HelloApplication.stage);
-        if(edited_receipt == null)
+        if(receipt_output_content_pane.getChildren().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Вы не выбрали рецепт");
+            alert.show();
             return;
+        }
+
+        File file = fileChooser.showSaveDialog(HelloApplication.stage);
         if(file != null) {
             file.createNewFile();
             PrintStream ps = new PrintStream(new FileOutputStream(file), true);
             if(metric_kg.isSelected())
                 ps.println(PryanikService.map_to_string(edited_receipt));
-            ps.println(PryanikService.map_to_string_tonn(edited_receipt));
+            if(metric_tonn.isSelected())
+                ps.println(PryanikService.map_to_string_tonn(edited_receipt));
             ps.close();
         }
     }
     @FXML
     void metric_kg() throws IOException {
         metric_kg.setToggleGroup(metric);
+        receipt_output_content_pane.getChildren().clear();
         if(edited_receipt != null)
             show_receipt(edited_receipt);
     }
 
     @FXML
     void metric_tonn() throws FileNotFoundException {
+        metric_tonn.setToggleGroup(metric);
         receipt_output_content_pane.getChildren().clear();
         if(edited_receipt != null) {
             for (var entry : edited_receipt.entrySet()) {

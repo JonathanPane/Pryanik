@@ -34,5 +34,4 @@ public class ReceiptItemView extends VBox {
         super.getChildren().add(image_view);
         super.getChildren().add(metric);
     }
-
 }

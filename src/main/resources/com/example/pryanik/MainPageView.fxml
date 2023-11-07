@@ -38,7 +38,7 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Единицы измерения">
                      <items>
-                        <RadioMenuItem fx:id="metric_kg" mnemonicParsing="false" onAction="#metric_kg" text="Килограммы">
+                        <RadioMenuItem fx:id="metric_kg" mnemonicParsing="false" onAction="#metric_kg" selected="true" text="Килограммы">
                            <toggleGroup>
                               <ToggleGroup fx:id="metric" />
                            </toggleGroup></RadioMenuItem>
