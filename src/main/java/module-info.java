@@ -9,4 +9,6 @@ module com.example.pryanik {
     opens com.example.pryanik.services to javafx.fxml;
     opens com.example.pryanik.controllers to javafx.fxml;
     exports com.example.pryanik.controllers;
+    exports com.example.pryanik.project.library;
+    opens com.example.pryanik.project.library to javafx.fxml;
 }

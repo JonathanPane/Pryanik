@@ -3,6 +3,8 @@ package com.example.pryanik.controllers;
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.HelloApplication;
 import com.example.pryanik.enums.ThemeEnum;
+import com.example.pryanik.project.library.ProjectFoundation;
+import com.example.pryanik.project.library.StageConfiguration;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class ModalGreetingWindowController {
@@ -24,7 +27,7 @@ public class ModalGreetingWindowController {
     @FXML
     void initialize(){
         fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецетпа","*.receipt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецепта","*.receipt"));
 
     }
 
@@ -37,18 +40,18 @@ public class ModalGreetingWindowController {
     @FXML
     void ok() throws IOException {
         BeanContext.register_bean("path to file", text_field.getText());
-        Stage stage = new Stage();
-        HelloApplication.stage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MainPageView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        BeanContext.register_bean("Theme", ThemeEnum.DEFAULT);
-        scene.getStylesheets().add(HelloApplication.class.getResource("/com/example/pryanik/Main.css").toExternalForm());
-        stage.setTitle("Пряникиии");
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setHeight(primaryScreenBounds.getHeight());
-        stage.setWidth(primaryScreenBounds.getWidth());
-        stage.setScene(scene);
-        stage.show();
+
+        ProjectFoundation.create_new_window_from_fxml(
+                StageConfiguration.builder()
+                        .title("Пряникиии")
+                        .bean_name("Main Page")
+                        .path_to_fxml("MainPageView.fxml")
+                        .build(),
+                "/com/example/pryanik/Main.css"
+        );
+
+        ProjectFoundation.maximizeStageWindow(BeanContext.get_bean("Main Page"));
+
         BeanContext.<Stage>get_and_remove_bean("Modal Greeting Window").close();
     }
 

@@ -4,6 +4,8 @@ import com.example.pryanik.BeanContext;
 import com.example.pryanik.HelloApplication;
 import com.example.pryanik.UI.ReceiptItemView;
 import com.example.pryanik.enums.ThemeEnum;
+import com.example.pryanik.project.library.ProjectFoundation;
+import com.example.pryanik.project.library.StageConfiguration;
 import com.example.pryanik.services.PryanikService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainPageController {
     private static FileChooser fileChooser;
@@ -42,9 +45,13 @@ public class MainPageController {
     private RadioMenuItem metric_tonn;
 
     @FXML
-    void initialize() throws IOException {
+    void initialize(){
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецепта", "*.receipt"));
+        setup_bindings();
+    }
+
+    private void setup_bindings(){
         menu_bar.prefWidthProperty().bind(anchor_pane.widthProperty());
         scroll_pane.prefWidthProperty().bind(anchor_pane.widthProperty());
         scroll_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
@@ -52,6 +59,8 @@ public class MainPageController {
         receipt_output_content_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
     }
 
+
+    // TODO: рефакторить! много кода, глубокие вложенности
     void show_receipt(Map<String, Double> receipt) throws IOException {
         receipt_output_content_pane.getChildren().clear();
         for (var entry : receipt.entrySet()) {
@@ -74,6 +83,7 @@ public class MainPageController {
             }
         }
     }
+
     @FXML
     void choose_receipt() throws IOException {
         File file = fileChooser.showOpenDialog(HelloApplication.stage);
@@ -87,10 +97,14 @@ public class MainPageController {
             this.edited_receipt = receipt;
         }
     }
+
     @FXML
     void close_application() {
         HelloApplication.stage.close();
     }
+
+
+    // TODO: протестить!
     @FXML
     void print_file() {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
@@ -103,6 +117,8 @@ public class MainPageController {
         }
     }
 
+
+    // TODO: рефакторить! много кода
     @FXML
     void save_file() throws IOException {
         if(receipt_output_content_pane.getChildren().isEmpty()){
@@ -122,6 +138,7 @@ public class MainPageController {
             ps.close();
         }
     }
+
     @FXML
     void metric_kg() throws IOException {
         metric_kg.setToggleGroup(metric);
@@ -130,6 +147,8 @@ public class MainPageController {
             show_receipt(edited_receipt);
     }
 
+
+    // TODO: рефакторить! глубокая вложенность
     @FXML
     void metric_tonn() throws FileNotFoundException {
         metric_tonn.setToggleGroup(metric);
@@ -153,7 +172,7 @@ public class MainPageController {
                 .getScene()
                 .getStylesheets()
                 .add(
-                        HelloApplication.class.getResource(ThemeEnum.DARK.path_to_css).toExternalForm()
+                        Objects.requireNonNull(HelloApplication.class.getResource(ThemeEnum.DARK.path_to_css)).toExternalForm()
                 );
         BeanContext.set_value_in_bean("Theme", ThemeEnum.DARK);
     }
@@ -178,17 +197,17 @@ public class MainPageController {
            return BeanContext.get_and_remove_bean("Масса");
         else return -1;
     }
+
     void show_modal_window() throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ModalWindow.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add(HelloApplication.class.getResource("/com/example/pryanik/Main.css").toExternalForm());
-        switch (BeanContext.<ThemeEnum>get_bean("Theme")){
-            case DARK ->  scene.getStylesheets().add(HelloApplication.class.getResource(ThemeEnum.DARK.path_to_css).toExternalForm());
-        }
-        stage.setScene(scene);
-        stage.setResizable(false);
-        BeanContext.register_bean("Modal Window Stage", stage);
-        stage.showAndWait();
+        ProjectFoundation.create_new_window_from_fxml(
+                StageConfiguration.builder()
+                        .title("Модальное окно")
+                        .path_to_fxml("ModalWindow.fxml")
+                        .bean_name("Modal Window Stage")
+                        .show_and_wait()
+                        .make_non_resizable()
+                        .build(),
+                "/com/example/pryanik/Main.css", BeanContext.<ThemeEnum>get_bean("Theme").path_to_css
+        );
     }
 }
