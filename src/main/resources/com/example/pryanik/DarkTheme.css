@@ -27,4 +27,21 @@
     -fx-text-fill: white;
     -fx-background-color: #121212;
 }
+.receipt-item-view {
+    -fx-background-color: #121212;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
 
+.receipt-item-view .label {
+    -fx-text-fill: #c7bfbf;
+}
+.anchor-pane{
+    -fx-background-color: #212020;
+}
+.anchor-pane .label{
+    -fx-text-fill: white;
+}
+.scroll_pane{
+    -fx-background-color: #121212;
+}

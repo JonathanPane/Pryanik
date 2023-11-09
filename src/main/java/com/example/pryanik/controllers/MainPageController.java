@@ -3,6 +3,7 @@ package com.example.pryanik.controllers;
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.HelloApplication;
 import com.example.pryanik.UI.ReceiptItemView;
+import com.example.pryanik.enums.ThemeEnum;
 import com.example.pryanik.services.PryanikService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,8 @@ public class MainPageController {
     @FXML
     private AnchorPane anchor_pane;
     @FXML
+    private ScrollPane scroll_pane;
+    @FXML
     private FlowPane receipt_output_content_pane;
     @FXML
     private MenuBar menu_bar;
@@ -39,30 +42,35 @@ public class MainPageController {
     private RadioMenuItem metric_tonn;
 
     @FXML
-    void initialize(){
+    void initialize() throws IOException {
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецепта", "*.receipt"));
         menu_bar.prefWidthProperty().bind(anchor_pane.widthProperty());
+        scroll_pane.prefWidthProperty().bind(anchor_pane.widthProperty());
+        scroll_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
+        receipt_output_content_pane.prefWidthProperty().bind(scroll_pane.widthProperty());
+        receipt_output_content_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
     }
-    void show_receipt(Map<String, Double> receipt) throws IOException{
+
+    void show_receipt(Map<String, Double> receipt) throws IOException {
         receipt_output_content_pane.getChildren().clear();
         for (var entry : receipt.entrySet()) {
             if (entry.getValue() != 0) {
+                if (metric_tonn.isSelected()) {
                     receipt_output_content_pane.getChildren().add(
                             new ReceiptItemView(
                                     entry.getKey(),
-                                    entry.getValue() + " кг",
-                                    "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
+                                    String.format("%.7f %s", entry.getValue() / 1000, "т")
                             )
                     );
-                if(metric_tonn.isSelected())
-                    receipt_output_content_pane.getChildren().add(
+                }
+                else receipt_output_content_pane.getChildren().add(
                         new ReceiptItemView(
                                 entry.getKey(),
-                                String.format("%.6f %s",entry.getValue() / 1000 , "т"),
-                                "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
+                                String.format("%.4f %s", entry.getValue(), "кг")
                         )
                 );
+
             }
         }
     }
@@ -70,7 +78,7 @@ public class MainPageController {
     void choose_receipt() throws IOException {
         File file = fileChooser.showOpenDialog(HelloApplication.stage);
         if(file != null) {
-            double mass = show_modal_window_and_get_mass();
+            double mass = get_mass();
             if(mass < 0)
                 return;
             var receipt = PryanikService.getReceipt(file.getPath());
@@ -132,8 +140,7 @@ public class MainPageController {
                     receipt_output_content_pane.getChildren().add(
                             new ReceiptItemView(
                                     entry.getKey(),
-                                    String.format("%.6f %s",entry.getValue() / 1000 , "т"),
-                                    "C:\\Users\\Gena\\Downloads\\free-icon-cookie-1047711.png"
+                                    String.format("%.6f %s",entry.getValue() / 1000 , "т")
                             )
                     );
             }
@@ -146,8 +153,9 @@ public class MainPageController {
                 .getScene()
                 .getStylesheets()
                 .add(
-                        HelloApplication.class.getResource("/com/example/pryanik/DarkTheme.css").toExternalForm()
+                        HelloApplication.class.getResource(ThemeEnum.DARK.path_to_css).toExternalForm()
                 );
+        BeanContext.set_value_in_bean("Theme", ThemeEnum.DARK);
     }
 
     @FXML
@@ -165,16 +173,22 @@ public class MainPageController {
 
     }
 
-    double show_modal_window_and_get_mass() throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ModalWindow.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        BeanContext.register_bean("Modal Window Stage", stage);
-        stage.showAndWait();
+    double get_mass(){
         if(BeanContext.contains_bean("Масса"))
            return BeanContext.get_and_remove_bean("Масса");
         else return -1;
     }
-
+    void show_modal_window() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ModalWindow.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(HelloApplication.class.getResource("/com/example/pryanik/Main.css").toExternalForm());
+        switch (BeanContext.<ThemeEnum>get_bean("Theme")){
+            case DARK ->  scene.getStylesheets().add(HelloApplication.class.getResource(ThemeEnum.DARK.path_to_css).toExternalForm());
+        }
+        stage.setScene(scene);
+        stage.setResizable(false);
+        BeanContext.register_bean("Modal Window Stage", stage);
+        stage.showAndWait();
+    }
 }

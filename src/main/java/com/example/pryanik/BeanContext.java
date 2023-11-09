@@ -25,6 +25,10 @@ public class BeanContext {
         remove_bean(name);
         return res;
     }
+    public static void set_value_in_bean(String name, Object new_value){
+        context.remove(name);
+        context.put(name, new_value);
+    }
     public static boolean contains_bean(String name){
         return context.containsKey(name);
     }

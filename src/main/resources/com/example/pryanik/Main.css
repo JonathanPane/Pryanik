@@ -5,3 +5,7 @@
 .receipt-item-view .label{
     -fx-text-fill: black;
 }
+.receipt-item-view {
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
