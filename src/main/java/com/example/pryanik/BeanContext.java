@@ -70,7 +70,7 @@ public class BeanContext {
             throw new BeanNotFoundException(name);
         }
         if(!context.get(name).for_system)
-            info_about_bean.add(String.format("%10s: %30s;", "changing value", name));
+            info_about_bean.add(String.format("%10s: %30s;", "set", name));
         boolean for_system = context.get(name).for_system;
         context.remove(name);
         context.put(name, new ObjectBeanContainer(new_value, for_system));

@@ -2,6 +2,7 @@ package com.example.pryanik.project.library;
 
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.HelloApplication;
+import com.example.pryanik.enums.ThemeEnum;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -41,5 +42,18 @@ public class ProjectFoundation {
         Thread thread = new Thread(task);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    public static void show_modal_window_for_inputting_mass() throws IOException {
+        ProjectFoundation.create_new_window_from_fxml(
+                StageConfiguration.builder()
+                        .title("Модальное окно")
+                        .path_to_fxml("ModalWindow.fxml")
+                        .bean_name("Modal Window Stage")
+                        .show_and_wait()
+                        .make_non_resizable()
+                        .build(),
+                "/com/example/pryanik/Main.css", BeanContext.<ThemeEnum>get_bean("Theme").path_to_css
+        );
     }
 }

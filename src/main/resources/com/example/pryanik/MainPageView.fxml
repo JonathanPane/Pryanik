@@ -32,7 +32,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                       <MenuItem mnemonicParsing="false" onAction="#pick_dark_theme" text="Темная" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#pick_lavander_theme" text="Лавандовая" />
+                        <MenuItem mnemonicParsing="false" onAction="#pick_lavender_theme" text="Лавандовая" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#pick_spring_theme" text="Весенняя" />
                     </items>

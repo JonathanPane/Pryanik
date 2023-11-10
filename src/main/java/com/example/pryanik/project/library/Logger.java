@@ -31,7 +31,8 @@ public class Logger {
 
             @Override
             public void flush() throws IOException {
-                info(new String(toStr()));
+                String out = new String(toStr());
+                print_by_type(out, "STDOUT", Color.valueOf("#2a7aaf"));
                 bytes.clear();
             }
 
@@ -63,7 +64,7 @@ public class Logger {
     }
 
     public static void warn(String str) {
-        print_by_type(str, "WARN", Color.color(255, 204, 0));
+        print_by_type(str, "WARN", Color.color(255/255d, 204/255d, 0));
     }
 
     public static void error(String str) {

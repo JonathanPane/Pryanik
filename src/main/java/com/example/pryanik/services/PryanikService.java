@@ -37,11 +37,10 @@ public class PryanikService {
     }
 
     public static Map<String, Double> mass_counter(Map<String, Double> receipt, double mass) {
-        double tonn = 1000.0;
         HashMap<String, Double> res = new HashMap<>();
 
         for (Map.Entry<String, Double> entry : receipt.entrySet()) {
-            res.put(entry.getKey(), (entry.getValue() * mass) / tonn);
+            res.put(entry.getKey(), entry.getValue() * mass);
         }
 
         return res;
