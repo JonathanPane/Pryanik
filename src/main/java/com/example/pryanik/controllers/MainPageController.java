@@ -61,25 +61,31 @@ public class MainPageController {
         scroll_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
         receipt_output_content_pane.prefWidthProperty().bind(scroll_pane.widthProperty());
         receipt_output_content_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
+        binding_items_list_with_views_list();
+    }
 
+    private void binding_items_list_with_views_list(){
         items.addListener((ListChangeListener<? super ReceiptItem>) change -> {
             while (change.next()) {
-                if(change.wasAdded()){
-                    for (ReceiptItem receiptItem : change.getAddedSubList()) {
-                        receiptItemViews.add(
-                                new ReceiptItemView(receiptItem)
-                        );
-                    }
-                }
-
-                // TODO: Не работает связывание в этом месте! при удалении из списка items, список receiptItemViews не меняется
-                else if(change.wasRemoved()){
-                    for (ReceiptItem receiptItem : change.getRemoved()) {
-                        receiptItemViews.removeIf(view -> ((ReceiptItemView) view).getReceiptItem() == receiptItem);
-                    }
-                }
+                handle_adding_change(change);
+                handle_removing_change(change);
             }
         });
+    }
+
+    private void handle_adding_change(ListChangeListener.Change<? extends ReceiptItem> change){
+        if(!change.wasAdded())
+            return;
+        change.getAddedSubList().forEach(item -> receiptItemViews.add(ReceiptItemView.view_for(item)));
+    }
+
+    // TODO: Не работает связывание в этом месте! при удалении из списка items, список receiptItemViews не меняется
+    private void handle_removing_change(ListChangeListener.Change<? extends ReceiptItem> change){
+        if(!change.wasRemoved())
+            return;
+        for (ReceiptItem receiptItem : change.getRemoved()) {
+            receiptItemViews.removeIf(view -> ((ReceiptItemView) view).getReceiptItem() == receiptItem);
+        }
     }
 
 
@@ -98,7 +104,7 @@ public class MainPageController {
     }
 
 
-    // TODO: протестить!
+    // TODO: не работает!
     @FXML
     void print_file() {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
@@ -134,7 +140,7 @@ public class MainPageController {
     }
 
     @FXML
-    void metric_kg() throws IOException {
+    void metric_kg() {
         for (ReceiptItem item : items) {
             item.toggle_kg();
         }

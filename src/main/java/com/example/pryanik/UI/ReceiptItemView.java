@@ -18,7 +18,7 @@ public class ReceiptItemView extends VBox {
     private IngredientsEnum ingredients_type;
     private ReceiptItem receiptItem;
 
-    public ReceiptItemView(ReceiptItem item) {
+    private ReceiptItemView(ReceiptItem item) {
         define_ingredient_type_by_name(item.getName());
 
         Label title_label = new Label();
@@ -46,6 +46,10 @@ public class ReceiptItemView extends VBox {
 
 
         getStyleClass().add("receipt-item-view");
+    }
+
+    public static ReceiptItemView view_for(ReceiptItem item){
+        return new ReceiptItemView(item);
     }
 
     public IngredientsEnum getIngredients_type() {

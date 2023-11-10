@@ -1,6 +1,7 @@
 package com.example.pryanik;
 
 import com.example.pryanik.enums.ThemeEnum;
+import com.example.pryanik.project.library.Logger;
 import com.example.pryanik.project.library.ProjectFoundation;
 import com.example.pryanik.project.library.StageConfiguration;
 import javafx.application.Application;

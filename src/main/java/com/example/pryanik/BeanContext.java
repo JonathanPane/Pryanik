@@ -34,7 +34,7 @@ public class BeanContext {
             throw new BeanDuplicateException(name);
         }
         if(!for_system)
-            info_about_bean.add(String.format("%10s: %30s; %50s", "register", name, bean.getClass().getCanonicalName()));
+            info_about_bean.add(String.format("%10s: %30s; %50s%20s: %s", "register", name, bean.getClass().getCanonicalName(), "value", bean));
         context.put(name, new ObjectBeanContainer(bean, for_system));
     }
 
@@ -43,7 +43,7 @@ public class BeanContext {
             throw new BeanNotFoundException(name);
         }
         if(!context.get(name).for_system)
-            info_about_bean.add(String.format("%10s: %30s; %50s", "get", name, context.get(name).value.getClass().getCanonicalName()));
+            info_about_bean.add(String.format("%10s: %30s; %50s%20s: %s", "get", name, context.get(name).value.getClass().getCanonicalName(), "return", context.get(name).value));
 
         return (T) context.get(name).value;
     }
@@ -70,21 +70,13 @@ public class BeanContext {
             throw new BeanNotFoundException(name);
         }
         if(!context.get(name).for_system)
-            info_about_bean.add(String.format("%10s: %30s;", "set", name));
+            info_about_bean.add(String.format("%10s: %30s; %50s%20s: %s", "set", name, new_value.getClass().getCanonicalName(), "new value", new_value));
         boolean for_system = context.get(name).for_system;
         context.remove(name);
         context.put(name, new ObjectBeanContainer(new_value, for_system));
     }
 
-    private static class ObjectBeanContainer{
-        private final Object value;
-        private final boolean for_system;
-
-        public ObjectBeanContainer(Object value, boolean for_system) {
-            this.value = value;
-            this.for_system = for_system;
-        }
-    }
+    private record ObjectBeanContainer(Object value, boolean for_system) {}
 
     public static boolean contains_bean(String name) {
         return context.containsKey(name);
