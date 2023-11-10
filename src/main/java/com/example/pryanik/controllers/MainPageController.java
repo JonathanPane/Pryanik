@@ -79,7 +79,6 @@ public class MainPageController {
         change.getAddedSubList().forEach(item -> receiptItemViews.add(ReceiptItemView.view_for(item)));
     }
 
-    // TODO: Не работает связывание в этом месте! при удалении из списка items, список receiptItemViews не меняется
     private void handle_removing_change(ListChangeListener.Change<? extends ReceiptItem> change){
         if(!change.wasRemoved())
             return;

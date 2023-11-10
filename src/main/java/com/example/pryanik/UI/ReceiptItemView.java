@@ -19,6 +19,7 @@ public class ReceiptItemView extends VBox {
     private ReceiptItem receiptItem;
 
     private ReceiptItemView(ReceiptItem item) {
+        this.receiptItem = item;
         define_ingredient_type_by_name(item.getName());
 
         Label title_label = new Label();

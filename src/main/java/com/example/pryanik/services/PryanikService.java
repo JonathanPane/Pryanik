@@ -46,20 +46,6 @@ public class PryanikService {
         return res;
     }
 
-    public static String map_to_string(Map<String, Double> edited_receipt) {
-        String str = "";
-        for (var entry : edited_receipt.entrySet())
-            if (entry.getValue() != 0)
-                str += String.format("%s - %.3f кг\n", entry.getKey(), entry.getValue());
-        return str;
-    }
 
-    public static String map_to_string_tonn(Map<String, Double> edited_receipt) {
-        String str = "";
-        for (var entry : edited_receipt.entrySet())
-            if (entry.getValue() != 0)
-                str += String.format("%s - %.5f т\n", entry.getKey(), entry.getValue() / 1000);
-        return str;
-    }
 }
 
