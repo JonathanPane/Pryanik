@@ -17,9 +17,9 @@ public class PryanikService {
             String str = scanner.nextLine();
             if (str.split("-").length != 2)
                 continue;
-            if (!isNumeric(str.split("-")[1]))
+            if (!isNumeric(remove_metrics(str.split("-")[1])))
                 continue;
-            receipt.put(str.split("-")[0].strip(), Double.parseDouble(str.split("-")[1].strip()));
+            receipt.put(str.split("-")[0].strip(), Double.parseDouble(remove_metrics(str.split("-")[1]).strip()));
         }
 
         return receipt;
@@ -40,12 +40,16 @@ public class PryanikService {
         HashMap<String, Double> res = new HashMap<>();
 
         for (Map.Entry<String, Double> entry : receipt.entrySet()) {
-            res.put(entry.getKey(), entry.getValue() * mass);
+            res.put(entry.getKey(), format(entry.getValue() * mass / 1000));
         }
 
         return res;
     }
-
-
+    public static double format(double mass){
+        return Double.parseDouble(String.format("%.3f", (double) Math.round(mass * 1000) / 1000));
+    }
+    private static String remove_metrics(String text){
+        return text.replace("кг", "").replace("т", "");
+    }
 }
 

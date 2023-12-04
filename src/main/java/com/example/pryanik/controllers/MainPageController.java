@@ -7,6 +7,7 @@ import com.example.pryanik.UI.ReceiptItemView;
 import com.example.pryanik.enums.ThemeEnum;
 import com.example.pryanik.project.library.ProjectFoundation;
 import com.example.pryanik.project.library.StageConfiguration;
+import com.example.pryanik.services.FileIOService;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -136,6 +137,7 @@ public class MainPageController {
 //                ps.println(PryanikService.map_to_string_tonn(edited_receipt));
 //            ps.close();
 //        }
+        FileIOService.save_file(items);
     }
 
     @FXML

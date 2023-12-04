@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
@@ -39,8 +40,12 @@ public class ModalGreetingWindowController {
 
     @FXML
     void ok() throws IOException {
+        if(!exists_file_on_path(text_field.getText())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING,"Неверно задан путь к файлу");
+            alert.showAndWait();
+            return;
+        }
         BeanContext.register_bean("path to file", text_field.getText());
-
         ProjectFoundation.create_new_window_from_fxml(
                 StageConfiguration.builder()
                         .title("Пряникиии")
@@ -62,5 +67,8 @@ public class ModalGreetingWindowController {
         File file = fileChooser.showOpenDialog(null);
         if(file != null)
             text_field.setText(file.getPath());
+    }
+    boolean exists_file_on_path(String path){
+        return new File(path).exists();
     }
 }

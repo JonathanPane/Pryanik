@@ -2,8 +2,9 @@ package com.example.pryanik.project.library;
 
 public class StageConfiguration{
     private String title, bean_name, path_to_fxml;
-    private boolean resizable, wait_termination;
+    private boolean resizable, wait_termination, modality;
     private StageConfiguration(){
+        modality = false;
         title = "Title!";
         bean_name = "BEAN: "+Math.random();
         resizable = true;
@@ -38,9 +39,21 @@ public class StageConfiguration{
             res.wait_termination = true;
             return this;
         }
+        public Builder set_modality(){
+            res.modality = true;
+            return this;
+        }
         public StageConfiguration build(){
             return res;
         }
+    }
+
+    public boolean isModality() {
+        return modality;
+    }
+
+    public void setModality(boolean modality) {
+        this.modality = modality;
     }
 
     public String getTitle() {
