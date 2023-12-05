@@ -5,6 +5,8 @@ import com.example.pryanik.DTO.ReceiptItem;
 import com.example.pryanik.services.PryanikService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -61,6 +63,9 @@ public class ModalWindowController {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
+        if(!BeanContext.<RadioMenuItem>get_bean("metric kg").isSelected())
+            for (ReceiptItem item : items) {
+                item.toggle_t();
+            }
     }
 }

@@ -28,4 +28,12 @@ public class FileIOService{
         fileOutputStream.write(text.toString().getBytes(StandardCharsets.UTF_8));
         fileOutputStream.flush();
     }
+    public static void open_file() throws IOException {
+        File open_file = ProjectFoundation.select_file("*.receipt", "Файл рецепта", false);
+        if(open_file != null){
+            BeanContext.set_value_in_bean("path to file", open_file.getPath());
+            ProjectFoundation.show_modal_window_for_inputting_mass();
+        }
+    }
+
 }

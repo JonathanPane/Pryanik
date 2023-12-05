@@ -21,6 +21,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Map;
@@ -44,6 +45,8 @@ public class MainPageController {
     private ObservableList<Node> receiptItemViews;
 
     private ObservableList<ReceiptItem> items;
+    @FXML
+    private RadioMenuItem metric_kg;
 
     @FXML
     void initialize(){
@@ -54,6 +57,7 @@ public class MainPageController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецепта", "*.receipt"));
         setup_bindings();
         BeanContext.register_bean("items_list", items);
+        BeanContext.register_bean("metric kg", metric_kg);
     }
 
     private void setup_bindings(){
@@ -91,52 +95,38 @@ public class MainPageController {
 
     @FXML
     void choose_receipt() throws IOException {
-        File file = fileChooser.showOpenDialog(HelloApplication.stage);
-        if(file != null) {
-            BeanContext.set_value_in_bean("path to file", file.getPath());
-            ProjectFoundation.show_modal_window_for_inputting_mass();
-        }
+        FileIOService.open_file();
     }
 
     @FXML
     void close_application() {
-        HelloApplication.stage.close();
+        BeanContext.<Stage>get_bean("Main Page").close();
     }
 
 
-    // TODO: не работает!
     @FXML
-    void print_file() {
-        PrinterJob printerJob = PrinterJob.createPrinterJob();
-        if (printerJob != null) {
-            PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
-            boolean success = printerJob.printPage(pageLayout,receipt_output_content_pane);
-            if(success){
-                printerJob.endJob();
-            }
-        }
+    void print_file() throws IOException {
+//        PrinterJob printerJob = PrinterJob.createPrinterJob();
+//        if (printerJob != null) {
+//            PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
+//            boolean success = printerJob.printPage(pageLayout,receipt_output_content_pane);
+//            if(success){
+//                printerJob.endJob();
+//            }
+//        }
+        ProjectFoundation.create_new_window_from_fxml(StageConfiguration.builder()
+                .path_to_fxml("PrintPreview.fxml")
+                .make_non_resizable()
+                .set_modality()
+                .title("Предпросмотр печати")
+                .show_and_wait()
+                .build()
+        );
     }
 
 
-    // TODO: рефакторить! много кода
     @FXML
     void save_file() throws IOException {
-//        if(receipt_output_content_pane.getChildren().isEmpty()){
-//            Alert alert = new Alert(Alert.AlertType.WARNING, "Вы не выбрали рецепт");
-//            alert.show();
-//            return;
-//        }
-//
-//        File file = fileChooser.showSaveDialog(HelloApplication.stage);
-//        if(file != null) {
-//            file.createNewFile();
-//            PrintStream ps = new PrintStream(new FileOutputStream(file), true);
-//            if(metric_kg.isSelected())
-//                ps.println(PryanikService.map_to_string(edited_receipt));
-//            if(metric_tonn.isSelected())
-//                ps.println(PryanikService.map_to_string_tonn(edited_receipt));
-//            ps.close();
-//        }
         FileIOService.save_file(items);
     }
 
@@ -157,8 +147,7 @@ public class MainPageController {
 
     @FXML
     void pick_dark_theme() {
-        HelloApplication
-                .stage
+        BeanContext.<Stage>get_bean("Main Page")
                 .getScene()
                 .getStylesheets()
                 .add(

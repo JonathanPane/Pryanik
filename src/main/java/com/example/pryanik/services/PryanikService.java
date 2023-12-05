@@ -46,7 +46,7 @@ public class PryanikService {
         return res;
     }
     public static double format(double mass){
-        return Double.parseDouble(String.format("%.3f", (double) Math.round(mass * 1000) / 1000));
+        return Double.parseDouble(String.format("%.3f", (double) Math.round(mass * 1000) / 1000).replace(",", "."));
     }
     private static String remove_metrics(String text){
         return text.replace("кг", "").replace("т", "");
