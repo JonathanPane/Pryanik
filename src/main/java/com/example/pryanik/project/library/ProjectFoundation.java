@@ -30,7 +30,8 @@ public class ProjectFoundation {
             scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource(path_to_stylesheet)).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(configuration.isResizable());
-        BeanContext.register_bean(configuration.getBean_name(), stage);
+        if(configuration.isCreating_bean())
+            BeanContext.register_bean(configuration.getBean_name(), stage);
         if(configuration.isWait_termination())
             stage.showAndWait();
         else

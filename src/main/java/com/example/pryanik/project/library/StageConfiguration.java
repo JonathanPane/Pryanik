@@ -2,14 +2,15 @@ package com.example.pryanik.project.library;
 
 public class StageConfiguration{
     private String title, bean_name, path_to_fxml;
-    private boolean resizable, wait_termination, modality;
+    private boolean resizable, wait_termination, modality, creating_bean;
     private StageConfiguration(){
         modality = false;
         title = "Title!";
-        bean_name = "BEAN: "+Math.random();
+        bean_name = "None";
         resizable = true;
         path_to_fxml = null;
         wait_termination = false;
+        creating_bean = false;
     }
     public static Builder builder(){
         return new Builder();
@@ -25,6 +26,7 @@ public class StageConfiguration{
         }
         public Builder bean_name(String bean_name){
             res.bean_name = bean_name;
+            res.creating_bean = true;
             return this;
         }
         public Builder make_non_resizable(){
@@ -74,5 +76,9 @@ public class StageConfiguration{
 
     public boolean isWait_termination(){
         return wait_termination;
+    }
+
+    public boolean isCreating_bean(){
+        return creating_bean;
     }
 }
