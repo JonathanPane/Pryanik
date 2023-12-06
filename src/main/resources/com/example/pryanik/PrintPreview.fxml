@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="550.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.PrintPreviewController">
    <children>
-      <ListView fx:id="text_field" layoutX="32.0" layoutY="41.0" prefHeight="445.0" prefWidth="315.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
+      <ListView fx:id="text_field" layoutX="32.0" layoutY="41.0" prefHeight="445.0" prefWidth="315.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0" />
       <Button layoutX="527.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#print" prefHeight="25.0" prefWidth="65.0" text="Печать" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <font>
             <Font size="13.0" />

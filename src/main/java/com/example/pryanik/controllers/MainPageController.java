@@ -106,14 +106,6 @@ public class MainPageController {
 
     @FXML
     void print_file() throws IOException {
-//        PrinterJob printerJob = PrinterJob.createPrinterJob();
-//        if (printerJob != null) {
-//            PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, 0, 0, 0, 0);
-//            boolean success = printerJob.printPage(pageLayout,receipt_output_content_pane);
-//            if(success){
-//                printerJob.endJob();
-//            }
-//        }
         ProjectFoundation.create_new_window_from_fxml(StageConfiguration.builder()
                 .path_to_fxml("PrintPreview.fxml")
                 .make_non_resizable()
