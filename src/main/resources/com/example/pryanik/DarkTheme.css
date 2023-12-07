@@ -45,3 +45,15 @@
 .scroll_pane{
     -fx-background-color: #121212;
 }
+#mass_field{
+    -fx-background-color: #121212;
+    -fx-text-fill: #c7bfbf;
+}
+#anchor_pane_print{
+    -fx-background-color: #121212;
+}
+#text_field{
+    -fx-background-color: #121212;
+    -fx-text-fill: #c7bfbf;
+}
+

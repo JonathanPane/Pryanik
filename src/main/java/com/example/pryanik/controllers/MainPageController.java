@@ -35,6 +35,8 @@ public class MainPageController {
 
     @FXML
     private ScrollPane scroll_pane;
+    @FXML
+    private ToggleGroup metric;
 
     @FXML
     private FlowPane receipt_output_content_pane;
@@ -47,6 +49,9 @@ public class MainPageController {
     private ObservableList<ReceiptItem> items;
     @FXML
     private RadioMenuItem metric_kg;
+    @FXML
+    private RadioMenuItem metric_tonn;
+    private boolean selected = false;
 
     @FXML
     void initialize(){
@@ -124,17 +129,21 @@ public class MainPageController {
 
     @FXML
     void metric_kg() {
-        for (ReceiptItem item : items) {
-            item.toggle_kg();
-        }
+        if(selected)
+            for (ReceiptItem item : items) {
+                item.toggle_kg();
+            }
+        selected = false;
     }
 
 
     @FXML
     void metric_tonn() {
-        for (ReceiptItem item : items) {
-            item.toggle_t();
-        }
+        if(!selected)
+            for (ReceiptItem item : items) {
+                item.toggle_t();
+            }
+        selected = true;
     }
 
     @FXML

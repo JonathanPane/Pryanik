@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class PryanikService {
 
-    public static Map<String, Double> getReceipt(String user_receipt) throws FileNotFoundException {
+    public static Map<String, Double> get_receipt(String user_receipt) throws FileNotFoundException {
         File file = new File(user_receipt);
         Scanner scanner = new Scanner(new FileInputStream(file));
         HashMap<String, Double> receipt = new HashMap<>();
@@ -17,7 +17,7 @@ public class PryanikService {
             String str = scanner.nextLine();
             if (str.split("-").length != 2)
                 continue;
-            if (!isNumeric(remove_metrics(str.split("-")[1])))
+            if (!is_numeric(remove_metrics(str.split("-")[1])))
                 continue;
             receipt.put(str.split("-")[0].strip(), Double.parseDouble(remove_metrics(str.split("-")[1]).strip()));
         }
@@ -25,7 +25,7 @@ public class PryanikService {
         return receipt;
     }
 
-    public static boolean isNumeric(String str) {
+    public static boolean is_numeric(String str) {
         if (str == null)
             return false;
         try {
@@ -46,7 +46,7 @@ public class PryanikService {
         return res;
     }
     public static double format(double mass){
-        return Double.parseDouble(String.format("%.3f", (double) Math.round(mass * 1000) / 1000).replace(",", "."));
+        return Double.parseDouble((String.format("%.3f", (double) Math.round(mass * 1000) / 1000d).replace(",", ".")));
     }
     private static String remove_metrics(String text){
         return text.replace("кг", "").replace("т", "");

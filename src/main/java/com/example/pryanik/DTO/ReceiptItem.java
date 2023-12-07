@@ -16,8 +16,12 @@ public class ReceiptItem {
         this.count = new SimpleDoubleProperty(count);
         this.metrics = new SimpleStringProperty(metrics);
         this.amount = new SimpleStringProperty(count+" "+metrics);
-        this.count.addListener((obs, oldV, newV) -> amount.set(count+" "+metrics));
-        this.metrics.addListener((obs, oldV, newV) -> amount.set(count+" "+metrics));
+        this.count.addListener((obs, oldV, newV) ->
+        {
+            this.metrics.addListener((obs1, oldV1, newV1) ->
+                    amount.set(newV + " " + newV1));
+        });
+
     }
 
     public void toggle_kg(){

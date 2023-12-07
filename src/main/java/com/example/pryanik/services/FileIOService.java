@@ -22,11 +22,12 @@ public class FileIOService{
             text.append(receiptItem.getMetrics()).append("\n");
         }
         File saving_file = ProjectFoundation.select_file("*.receipt", "Файл рецепта", true);
-        if(!saving_file.exists())
+        if(saving_file !=  null){
             saving_file.createNewFile();
         FileOutputStream fileOutputStream = new FileOutputStream(saving_file);
         fileOutputStream.write(text.toString().getBytes(StandardCharsets.UTF_8));
         fileOutputStream.flush();
+        }
     }
     public static void open_file() throws IOException {
         File open_file = ProjectFoundation.select_file("*.receipt", "Файл рецепта", false);

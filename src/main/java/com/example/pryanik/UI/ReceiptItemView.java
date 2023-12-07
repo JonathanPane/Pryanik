@@ -116,6 +116,8 @@ public class ReceiptItemView extends VBox {
             ingredients_type = IngredientsEnum.ВАНИЛИН;
         else if (contains_ignore_case(name, "Углеаммонийная"))
             ingredients_type = IngredientsEnum.АММОНИЙ;
+        else if (contains_ignore_case(name,"Творог"))
+            ingredients_type = IngredientsEnum.ТВОРОГ;
         else ingredients_type = IngredientsEnum.DEFAULT;
     }
 

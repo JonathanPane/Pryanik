@@ -14,11 +14,14 @@ import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PrintPreviewController {
+    @FXML
+    private AnchorPane anchor_pane_print;
     @FXML
     private TableColumn<ReceiptItem, String> mass;
 
@@ -46,17 +49,18 @@ public class PrintPreviewController {
         SpinnerValueFactory<Integer> factory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99, 1);
         quantity.setValueFactory(factory);
     }
-
     @FXML
     void print() {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
         if (printerJob != null) {
-            PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4,
-                    is_portrait? PageOrientation.PORTRAIT:PageOrientation.LANDSCAPE,
-                    0, 0, 0, 0);
-            boolean success = printerJob.printPage(pageLayout, text_field);
-            if(success){
-                printerJob.endJob();
+            for (var i = 1; i <= quantity.getValue(); i++) {
+                PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4,
+                        is_portrait ? PageOrientation.PORTRAIT : PageOrientation.LANDSCAPE,
+                        0, 0, 0, 0);
+                boolean success = printerJob.printPage(pageLayout, text_field);
+                if (success) {
+                    printerJob.endJob();
+                }
             }
         }
 }
