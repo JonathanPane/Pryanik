@@ -27,8 +27,8 @@
       <RadioButton layoutX="382.0" layoutY="466.0" mnemonicParsing="false" onAction="#toggle_landscape" text="Альбомная" toggleGroup="$orientation" AnchorPane.bottomAnchor="67.0" />
       <TableView fx:id="text_field" layoutX="82.0" layoutY="124.0" prefHeight="445.0" prefWidth="315.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
         <columns>
-          <TableColumn prefWidth="216.0" text="C1" />
-          <TableColumn prefWidth="98.0" text="C2" />
+          <TableColumn fx:id="name" prefWidth="200.0" sortable="false" text="Ингридиенты" />
+          <TableColumn fx:id="mass" minWidth="0.0" prefWidth="114.0" resizable="false" sortable="false" text="Масса" />
         </columns>
       </TableView>
    </children>

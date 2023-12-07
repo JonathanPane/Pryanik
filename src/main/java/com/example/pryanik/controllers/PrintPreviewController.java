@@ -12,12 +12,19 @@ import javafx.print.PageOrientation;
 import javafx.print.Paper;
 import javafx.print.PrinterJob;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PrintPreviewController {
+    @FXML
+    private TableColumn<ReceiptItem, String> mass;
+
+    @FXML
+    private TableColumn<ReceiptItem, String> name;
+
 
     @FXML
     private ToggleGroup orientation;
@@ -32,14 +39,12 @@ public class PrintPreviewController {
 
     @FXML
     void initialize(){
-        text_field.getItems().add(new PrintReceiptItemView("Имя", "Количество"));
+        mass.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        text_field.setItems(BeanContext.get_bean("items_list"));
         is_portrait = true;
         SpinnerValueFactory<Integer> factory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99, 1);
         quantity.setValueFactory(factory);
-        List<ReceiptItem> item_list = BeanContext.get_bean("items_list");
-        for (ReceiptItem receiptItem : item_list) {
-            text_field.getItems().add(new PrintReceiptItemView(receiptItem));
-        }
     }
 
     @FXML

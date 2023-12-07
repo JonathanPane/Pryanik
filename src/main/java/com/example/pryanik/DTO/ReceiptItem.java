@@ -9,11 +9,15 @@ public class ReceiptItem {
     private StringProperty name;
     private DoubleProperty count;
     private StringProperty metrics;
+    private StringProperty amount;
 
     public ReceiptItem(String name, double count, String metrics) {
         this.name = new SimpleStringProperty(name);
         this.count = new SimpleDoubleProperty(count);
         this.metrics = new SimpleStringProperty(metrics);
+        this.amount = new SimpleStringProperty(count+" "+metrics);
+        this.count.addListener((obs, oldV, newV) -> amount.set(count+" "+metrics));
+        this.metrics.addListener((obs, oldV, newV) -> amount.set(count+" "+metrics));
     }
 
     public void toggle_kg(){
@@ -36,6 +40,10 @@ public class ReceiptItem {
 
     public double getCount() {
         return count.get();
+    }
+
+    public String getAmount(){
+        return amount.get();
     }
 
     public void setCount(double count) {
