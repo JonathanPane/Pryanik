@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.text.DecimalFormat;
+
 public class ReceiptItem {
     private StringProperty name;
     private DoubleProperty count;
@@ -19,7 +21,7 @@ public class ReceiptItem {
         this.count.addListener((obs, oldV, newV) ->
         {
             this.metrics.addListener((obs1, oldV1, newV1) ->
-                    amount.set(newV + " " + newV1));
+                    amount.set(new DecimalFormat("0.#############").format(newV) + " " + newV1));
         });
 
     }
@@ -33,6 +35,7 @@ public class ReceiptItem {
         count.set(count.doubleValue() / 1000);
         metrics.set("т");
     }
+
 
     public String getName() {
         return name.get();

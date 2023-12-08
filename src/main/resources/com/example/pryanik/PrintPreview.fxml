@@ -10,22 +10,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor_pane_print" prefHeight="550.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.PrintPreviewController">
+<AnchorPane fx:id="anchor_pane_print" prefHeight="550.0" prefWidth="597.0" styleClass="anchor_pane_print" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.PrintPreviewController">
    <children>
       <Button layoutX="527.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#print" prefHeight="25.0" prefWidth="65.0" text="Печать" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Spinner fx:id="quantity" layoutX="527.0" layoutY="485.0" prefHeight="25.0" prefWidth="65.0" />
-      <Label layoutX="446.0" layoutY="488.0" prefHeight="17.0" prefWidth="76.0" text="Кол-во копий" />
-      <RadioButton layoutX="475.0" layoutY="466.0" mnemonicParsing="false" onAction="#toggle_portrait" selected="true" text="Портретная">
+      <Spinner fx:id="quantity" editable="true" layoutX="527.0" layoutY="485.0" prefHeight="25.0" prefWidth="65.0" />
+      <Label fx:id="amount" layoutX="446.0" layoutY="488.0" prefHeight="17.0" prefWidth="76.0" text="Кол-во копий" />
+      <RadioButton fx:id="portrait" layoutX="475.0" layoutY="466.0" mnemonicParsing="false" onAction="#toggle_portrait" selected="true" text="Портретная">
          <toggleGroup>
             <ToggleGroup fx:id="orientation" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="382.0" layoutY="466.0" mnemonicParsing="false" onAction="#toggle_landscape" text="Альбомная" toggleGroup="$orientation" AnchorPane.bottomAnchor="67.0" />
-      <TableView fx:id="text_field" layoutX="82.0" layoutY="124.0" prefHeight="445.0" prefWidth="315.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
+      <RadioButton fx:id="landscape" layoutX="382.0" layoutY="466.0" mnemonicParsing="false" onAction="#toggle_landscape" text="Альбомная" toggleGroup="$orientation" AnchorPane.bottomAnchor="67.0" />
+      <TableView fx:id="text_field_tableview" layoutX="82.0" layoutY="124.0" prefHeight="445.0" prefWidth="315.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
         <columns>
           <TableColumn fx:id="name" prefWidth="200.0" resizable="false" text="Ингридиенты" />
           <TableColumn fx:id="mass" prefWidth="114.0" resizable="false" text="Масса" />

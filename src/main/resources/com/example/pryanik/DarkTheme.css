@@ -52,8 +52,16 @@
 #anchor_pane_print{
     -fx-background-color: #121212;
 }
-#text_field{
+#text_field_tableview{
     -fx-background-color: #121212;
-    -fx-text-fill: #c7bfbf;
+}
+#landscape{
+    -fx-text-fill: white;
+}
+#portrait{
+    -fx-text-fill: white;
+}
+#amount{
+    -fx-text-fill: white;
 }
 

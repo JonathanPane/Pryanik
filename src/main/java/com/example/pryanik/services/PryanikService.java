@@ -9,8 +9,11 @@ import java.util.Scanner;
 
 public class PryanikService {
 
+    private static String file_name;
+
     public static Map<String, Double> get_receipt(String user_receipt) throws FileNotFoundException {
         File file = new File(user_receipt);
+        file_name = file.getName().replace(".receipt", "");
         Scanner scanner = new Scanner(new FileInputStream(file));
         HashMap<String, Double> receipt = new HashMap<>();
         while (scanner.hasNextLine()) {
@@ -24,6 +27,7 @@ public class PryanikService {
 
         return receipt;
     }
+
 
     public static boolean is_numeric(String str) {
         if (str == null)
@@ -50,6 +54,9 @@ public class PryanikService {
     }
     private static String remove_metrics(String text){
         return text.replace("кг", "").replace("т", "");
+    }
+    public static String getFile_name() {
+        return file_name;
     }
 }
 

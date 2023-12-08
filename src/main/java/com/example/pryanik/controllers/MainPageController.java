@@ -8,10 +8,12 @@ import com.example.pryanik.enums.ThemeEnum;
 import com.example.pryanik.project.library.ProjectFoundation;
 import com.example.pryanik.project.library.StageConfiguration;
 import com.example.pryanik.services.FileIOService;
+import com.example.pryanik.services.PryanikService;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Paper;
@@ -20,10 +22,13 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Path;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
 
@@ -52,17 +57,20 @@ public class MainPageController {
     @FXML
     private RadioMenuItem metric_tonn;
     private boolean selected = false;
+    @FXML
+    private Label pryanik_name;
 
     @FXML
     void initialize(){
         items = FXCollections.observableArrayList();
         receiptItemViews = receipt_output_content_pane.getChildren();
-
         fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Файл рецепта", "*.receipt"));
         setup_bindings();
         BeanContext.register_bean("items_list", items);
         BeanContext.register_bean("metric kg", metric_kg);
+        pryanik_name.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt", ""));
+        pryanik_name.setFont(new Font("Comis Sans", 15));
     }
 
     private void setup_bindings(){
@@ -117,7 +125,9 @@ public class MainPageController {
                 .set_modality()
                 .title("Предпросмотр печати")
                 .show_and_wait()
-                .build()
+                .build(),
+                "/com/example/pryanik/Main.css",
+                BeanContext.<ThemeEnum>get_bean("Theme").equals(ThemeEnum.DARK)?"/com/example/pryanik/DarkTheme.css":""
         );
     }
 

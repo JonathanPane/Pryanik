@@ -21,6 +21,8 @@ public class ProjectFoundation {
      */
     public static void create_new_window_from_fxml(StageConfiguration configuration, String... path_to_stylesheets) throws IOException {
         Stage stage = new Stage();
+        if(configuration.isCreating_bean())
+            BeanContext.register_bean(configuration.getBean_name(), stage);
         if(configuration.isModality())
             stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle(configuration.getTitle());
@@ -30,8 +32,6 @@ public class ProjectFoundation {
             scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource(path_to_stylesheet)).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(configuration.isResizable());
-        if(configuration.isCreating_bean())
-            BeanContext.register_bean(configuration.getBean_name(), stage);
         if(configuration.isWait_termination())
             stage.showAndWait();
         else

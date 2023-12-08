@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class ReceiptItemView extends VBox {
@@ -30,10 +31,10 @@ public class ReceiptItemView extends VBox {
         Label metric_label = new Label();
         metric_label.setText(item.getCount() + " " + item.getMetrics());
         item.metricsProperty().addListener((o, old_value, new_value) -> metric_label.textProperty().set(
-                round(item.getCount()) + " " + new_value
+                new DecimalFormat("0.#########").format(item.getCount()) + " " + new_value
         ));
         item.countProperty().addListener((o, old_value, new_value) -> metric_label.textProperty().set(
-                round(new_value.doubleValue()) + " " + item.getMetrics()
+                new DecimalFormat("0.#########").format(new_value) + " " + item.getMetrics()
         ));
         metric_label.setFont(new Font("Comic Sans", 20));
         super.setAlignment(Pos.CENTER);
@@ -123,8 +124,5 @@ public class ReceiptItemView extends VBox {
 
     private boolean contains_ignore_case(String name, String name1) {
         return name.toLowerCase().contains(name1.toLowerCase());
-    }
-    private double round(double a){
-        return Math.round(a * 1000) / 1000d;
     }
 }
