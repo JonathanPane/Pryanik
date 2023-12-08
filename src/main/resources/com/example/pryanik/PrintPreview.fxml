@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="anchor_pane_print" prefHeight="550.0" prefWidth="597.0" styleClass="anchor_pane_print" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.PrintPreviewController">
    <children>
-      <Button layoutX="527.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#print" prefHeight="25.0" prefWidth="65.0" text="Печать" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <Button fx:id="print_button" layoutX="527.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#print" prefHeight="25.0" prefWidth="65.0" text="Печать" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <font>
             <Font size="13.0" />
          </font>
@@ -31,5 +31,10 @@
           <TableColumn fx:id="mass" prefWidth="114.0" resizable="false" text="Масса" />
         </columns>
       </TableView>
+      <Label fx:id="pryanik_name_printpreview" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="14.0" prefHeight="27.0" prefWidth="270.0" text="Label" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="163.5" AnchorPane.rightAnchor="163.0">
+         <font>
+            <Font name="Times New Roman Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

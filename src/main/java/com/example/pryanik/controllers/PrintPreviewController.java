@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.function.UnaryOperator;
@@ -28,13 +29,15 @@ public class PrintPreviewController {
 
     @FXML
     private TableColumn<ReceiptItem, String> name;
-
-
+    @FXML
+    private Label pryanik_name_printpreview;
     @FXML
     private ToggleGroup orientation;
 
     @FXML
     private Spinner<Integer> quantity;
+    @FXML
+    private Button print_button;
 
     @FXML
     private TableView<PrintReceiptItemView> text_field_tableview;
@@ -43,6 +46,8 @@ public class PrintPreviewController {
 
     @FXML
     void initialize(){
+        pryanik_name_printpreview.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt",
+                ""));
         mass.setCellValueFactory(new PropertyValueFactory<>("amount"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         TextFormatter<Integer> priceFormatter = getIntegerTextFormatter();

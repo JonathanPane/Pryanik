@@ -64,4 +64,13 @@
 #amount{
     -fx-text-fill: white;
 }
+#pryanik_name_printpreview{
+    -fx-text-fill: white;
+}
+#print_button{
+    -fx-border-color: white;
+    -fx-background-color: rgb(78, 77, 77);
+    -fx-text-fill: white;
+}
+
 

@@ -52,7 +52,8 @@ public class ModalGreetingWindowController {
                         .bean_name("Main Page")
                         .path_to_fxml("MainPageView.fxml")
                         .build(),
-                "/com/example/pryanik/Main.css"
+                "/com/example/pryanik/Main.css",
+                BeanContext.<ThemeEnum>get_bean("Theme").equals(ThemeEnum.DARK)?"/com/example/pryanik/DarkTheme.css":""
         );
 
         ProjectFoundation.show_modal_window_for_inputting_mass();
