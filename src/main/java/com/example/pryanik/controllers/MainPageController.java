@@ -69,12 +69,13 @@ public class MainPageController {
         setup_bindings();
         BeanContext.register_bean("items_list", items);
         BeanContext.register_bean("metric kg", metric_kg);
-        pryanik_name.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt", ""));
-        pryanik_name.setFont(new Font("Comis Sans", 15));
+        pryanik_name.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt",
+                ""));
     }
 
     private void setup_bindings(){
         menu_bar.prefWidthProperty().bind(anchor_pane.widthProperty());
+        pryanik_name.setAlignment(Pos.TOP_CENTER);
         scroll_pane.prefWidthProperty().bind(anchor_pane.widthProperty());
         scroll_pane.prefHeightProperty().bind(anchor_pane.heightProperty());
         receipt_output_content_pane.prefWidthProperty().bind(scroll_pane.widthProperty());

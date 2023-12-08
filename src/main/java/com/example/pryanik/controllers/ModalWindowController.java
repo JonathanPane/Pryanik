@@ -27,12 +27,12 @@ public class ModalWindowController {
     void ok() {
         Stage stage = BeanContext.get_bean("Modal Window Stage");
         double res;
-        if(!validate(mass_field.getText())) {
+        if(!validate(mass_field.getText().replace(",","."))) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Вы ввели некорректные данные");
             alert.showAndWait();
             return;
         }
-        res = Double.parseDouble(mass_field.getText());
+        res = Double.parseDouble(mass_field.getText().replace(",","."));
         fill_receipt_items_list(res);
         BeanContext.remove_bean("Modal Window Stage");
         stage.close();
