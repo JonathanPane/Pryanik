@@ -3,8 +3,6 @@ package com.example.pryanik.UI;
 import com.example.pryanik.DTO.ReceiptItem;
 import com.example.pryanik.HelloApplication;
 import com.example.pryanik.enums.IngredientsEnum;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

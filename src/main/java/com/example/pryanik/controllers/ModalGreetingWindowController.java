@@ -1,23 +1,17 @@
 package com.example.pryanik.controllers;
 
 import com.example.pryanik.BeanContext;
-import com.example.pryanik.HelloApplication;
 import com.example.pryanik.enums.ThemeEnum;
 import com.example.pryanik.project.library.ProjectFoundation;
 import com.example.pryanik.project.library.StageConfiguration;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 
 public class ModalGreetingWindowController {

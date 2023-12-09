@@ -2,7 +2,6 @@ package com.example.pryanik.UI;
 
 import com.example.pryanik.DTO.ReceiptItem;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 
 public class PrintReceiptItemView extends HBox {

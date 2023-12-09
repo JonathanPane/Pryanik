@@ -3,8 +3,6 @@ package com.example.pryanik.controllers;
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.DTO.ReceiptItem;
 import com.example.pryanik.UI.PrintReceiptItemView;
-import com.example.pryanik.enums.ThemeEnum;
-import com.example.pryanik.services.PryanikService;
 import javafx.fxml.FXML;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
@@ -13,7 +11,6 @@ import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.File;
@@ -53,10 +50,12 @@ public class PrintPreviewController {
         TextFormatter<Integer> priceFormatter = getIntegerTextFormatter();
         quantity.getEditor().setTextFormatter(priceFormatter);
         text_field_tableview.setItems(BeanContext.get_bean("items_list"));
+
         is_portrait = true;
         SpinnerValueFactory<Integer> factory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99, 1);
         quantity.setValueFactory(factory);
     }
+
 
     private static TextFormatter<Integer> getIntegerTextFormatter() {
         NumberFormat format = NumberFormat.getIntegerInstance();
@@ -71,9 +70,9 @@ public class PrintPreviewController {
             }
             return c;
         };
-        TextFormatter<Integer> priceFormatter = new TextFormatter<Integer>(
+        TextFormatter<Integer> formatter = new TextFormatter<Integer>(
                 new IntegerStringConverter(), 0, filter);
-        return priceFormatter;
+        return formatter;
     }
 
     @FXML

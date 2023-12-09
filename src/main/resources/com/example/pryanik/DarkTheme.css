@@ -56,21 +56,21 @@
     -fx-background-color: #121212;
 }
 #landscape{
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
 }
 #portrait{
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
 }
 #amount{
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
 }
 #pryanik_name_printpreview{
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
 }
 #print_button{
-    -fx-border-color: white;
+    -fx-border-color: #c7bfbf;
     -fx-background-color: rgb(78, 77, 77);
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
 }
 
 
