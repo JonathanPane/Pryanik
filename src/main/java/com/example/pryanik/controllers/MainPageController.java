@@ -13,12 +13,14 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,6 +104,8 @@ public class MainPageController {
     @FXML
     void choose_receipt() throws IOException {
         FileIOService.open_file();
+        pryanik_name.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt",
+                ""));
     }
 
     @FXML

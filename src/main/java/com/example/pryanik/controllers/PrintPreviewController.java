@@ -3,17 +3,25 @@ package com.example.pryanik.controllers;
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.DTO.ReceiptItem;
 import com.example.pryanik.UI.PrintReceiptItemView;
+import com.example.pryanik.project.library.ProjectFoundation;
+import com.example.pryanik.project.library.StageConfiguration;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
-import javafx.print.PrinterJob;
+import javafx.geometry.Rectangle2D;
+import javafx.print.*;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.TableViewSkin;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Scale;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.function.UnaryOperator;
@@ -50,7 +58,6 @@ public class PrintPreviewController {
         TextFormatter<Integer> priceFormatter = getIntegerTextFormatter();
         quantity.getEditor().setTextFormatter(priceFormatter);
         text_field_tableview.setItems(BeanContext.get_bean("items_list"));
-
         is_portrait = true;
         SpinnerValueFactory<Integer> factory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 99, 1);
         quantity.setValueFactory(factory);
@@ -76,20 +83,21 @@ public class PrintPreviewController {
     }
 
     @FXML
-    void print() {
+    void print() throws IOException {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
         if (printerJob != null) {
-                for (var i = 1; i <= quantity.getValue(); i++) {
-                PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4,
-                        is_portrait ? PageOrientation.PORTRAIT : PageOrientation.LANDSCAPE,
-                        0, 0, 0, 0);
-                boolean success = printerJob.printPage(pageLayout, text_field_tableview);
-                if (success) {
-                    printerJob.endJob();
-                }
+            PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4,
+                    is_portrait ? PageOrientation.PORTRAIT : PageOrientation.LANDSCAPE,
+                    Printer.MarginType.DEFAULT);
+            for (var i = 1; i <= quantity.getValue(); i++) {
+                printerJob.printPage(pageLayout, text_field_tableview);
             }
+            printerJob.endJob();
         }
     }
+
+
+
     @FXML
     void toggle_landscape() {
         is_portrait = false;
