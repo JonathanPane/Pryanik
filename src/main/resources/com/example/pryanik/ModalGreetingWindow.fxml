@@ -6,22 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.ModalGreetingWindowController">
+<AnchorPane fx:id="anchor_pane_greeting" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pryanik.controllers.ModalGreetingWindowController">
    <children>
-      <Label alignment="CENTER" layoutX="43.0" layoutY="14.0" prefHeight="30.0" prefWidth="307.0" text="Выберите файл с рецептом">
+      <Label fx:id="label_greeting" alignment="CENTER" layoutX="43.0" layoutY="14.0" prefHeight="30.0" prefWidth="307.0" text="Выберите файл с рецептом">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <TextField fx:id="text_field" layoutX="55.0" layoutY="45.0" prefHeight="25.0" prefWidth="274.0" />
-      <Button layoutX="315.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#ok" prefHeight="25.0" prefWidth="33.0" text="ОК" AnchorPane.rightAnchor="7.0" />
-      <Button layoutX="282.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="25.0" prefWidth="70.0" text="Отмена" />
+      <Button fx:id="ok" layoutX="315.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#ok" prefHeight="25.0" prefWidth="33.0" text="ОК" AnchorPane.rightAnchor="7.0" />
+      <Button fx:id="cancel" layoutX="282.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="25.0" prefWidth="70.0" text="Отмена" />
       <Button layoutX="338.0" layoutY="45.0" mnemonicParsing="false" onAction="#view_path" prefHeight="25.0" prefWidth="45.0" text="Обзор">
          <font>
             <Font size="9.0" />
          </font>
       </Button>
-      <Label layoutX="22.0" layoutY="49.0" text="Файл:" />
+      <Label fx:id="file_label" layoutX="22.0" layoutY="49.0" text="Файл:" />
    </children>
 </AnchorPane>

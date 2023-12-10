@@ -20,7 +20,7 @@ public enum IngredientsEnum {
     СОЛЬ("/images/salt.png"),
     ВАНИЛИН("/images/vanilla.png"),
     ТВОРОГ("/images/cottagecheese.png"),
-    DEFAULT("/images/dairy-products.png")
+    DEFAULT("/images/dairy-products.png"),
     ;
     public String url_to_image;
     private IngredientsEnum(String url_to_image){

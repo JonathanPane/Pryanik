@@ -32,6 +32,10 @@ public class ProjectFoundation {
             scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource(path_to_stylesheet)).toExternalForm());
         stage.setScene(scene);
         stage.setResizable(configuration.isResizable());
+        if(configuration.isResize_min()){
+            stage.setMinWidth(configuration.getMin_width());
+            stage.setMinHeight(configuration.getMin_height());
+        }
         if(configuration.isWait_termination())
             stage.showAndWait();
         else

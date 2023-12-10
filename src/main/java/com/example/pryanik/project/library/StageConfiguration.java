@@ -2,8 +2,12 @@ package com.example.pryanik.project.library;
 
 public class StageConfiguration{
     private String title, bean_name, path_to_fxml;
-    private boolean resizable, wait_termination, modality, creating_bean;
+    private int min_width, min_height;
+    private boolean resizable, wait_termination, modality, creating_bean,resize_min;
     private StageConfiguration(){
+        min_height = 0;
+        min_width = 0;
+        resize_min = false;
         modality = false;
         title = "Title!";
         bean_name = "None";
@@ -29,6 +33,15 @@ public class StageConfiguration{
             res.creating_bean = true;
             return this;
         }
+        public Builder make_resize_min(){
+            res.resize_min = true;
+            return this;
+        }
+        public Builder min_dimension(int min_width, int min_height){
+            res.min_width = min_width;
+            res.min_height = min_height;
+            return this;
+        }
         public Builder make_non_resizable(){
             res.resizable = false;
             return this;
@@ -48,6 +61,54 @@ public class StageConfiguration{
         public StageConfiguration build(){
             return res;
         }
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBean_name(String bean_name) {
+        this.bean_name = bean_name;
+    }
+
+    public void setPath_to_fxml(String path_to_fxml) {
+        this.path_to_fxml = path_to_fxml;
+    }
+
+    public int getMin_width() {
+        return min_width;
+    }
+
+    public void setMin_width(int min_width) {
+        this.min_width = min_width;
+    }
+
+    public int getMin_height() {
+        return min_height;
+    }
+
+    public void setMin_height(int min_height) {
+        this.min_height = min_height;
+    }
+
+    public void setResizable(boolean resizable) {
+        this.resizable = resizable;
+    }
+
+    public void setWait_termination(boolean wait_termination) {
+        this.wait_termination = wait_termination;
+    }
+
+    public void setCreating_bean(boolean creating_bean) {
+        this.creating_bean = creating_bean;
+    }
+
+    public boolean isResize_min() {
+        return resize_min;
+    }
+
+    public void setResize_min(boolean resize_min) {
+        this.resize_min = resize_min;
     }
 
     public boolean isModality() {

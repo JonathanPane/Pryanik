@@ -48,6 +48,7 @@ public class PrintPreviewController {
     private TableView<PrintReceiptItemView> text_field_tableview;
     private boolean is_portrait;
     private final int i1 = 315, i2 = 445;
+    private final double i3 = 30;
 
     @FXML
     void initialize(){
@@ -85,17 +86,24 @@ public class PrintPreviewController {
     @FXML
     void print() throws IOException {
         PrinterJob printerJob = PrinterJob.createPrinterJob();
+        PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4,
+                is_portrait ? PageOrientation.PORTRAIT : PageOrientation.LANDSCAPE,
+                Printer.MarginType.HARDWARE_MINIMUM);
+        text_field_tableview.setPrefHeight(i3 * text_field_tableview.getItems().size());
+        printerJob.getJobSettings().setPageLayout(pageLayout);
         if (printerJob != null) {
-            PageLayout pageLayout = printerJob.getPrinter().createPageLayout(Paper.A4,
-                    is_portrait ? PageOrientation.PORTRAIT : PageOrientation.LANDSCAPE,
-                    Printer.MarginType.DEFAULT);
             for (var i = 1; i <= quantity.getValue(); i++) {
                 printerJob.printPage(pageLayout, text_field_tableview);
             }
             printerJob.endJob();
+            text_field_tableview.getTransforms().clear();
+        }
+        if (is_portrait) {
+            toggle_portrait();
+        } else {
+            toggle_landscape();
         }
     }
-
 
 
     @FXML
@@ -111,5 +119,4 @@ public class PrintPreviewController {
         text_field_tableview.setPrefWidth(i1);
         text_field_tableview.setPrefHeight(i2);
     }
-
 }

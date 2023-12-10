@@ -33,10 +33,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#pick_light_theme" text="Светлая" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                       <MenuItem mnemonicParsing="false" onAction="#pick_dark_theme" text="Темная" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#pick_lavender_theme" text="Лавандовая" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#pick_spring_theme" text="Весенняя" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Единицы измерения">

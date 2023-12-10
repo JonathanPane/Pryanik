@@ -6,7 +6,10 @@ import com.example.pryanik.project.library.ProjectFoundation;
 import com.example.pryanik.project.library.StageConfiguration;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -19,6 +22,16 @@ public class ModalGreetingWindowController {
 
     @FXML
     private TextField text_field;
+    @FXML
+    private AnchorPane anchor_pane_greeting;
+    @FXML
+    private Button cancel;
+    @FXML
+    private Label label_greeting;
+    @FXML
+    private Button ok;
+    @FXML
+    private Label file_label;
     @FXML
     void initialize(){
         fileChooser = new FileChooser();
@@ -45,9 +58,12 @@ public class ModalGreetingWindowController {
                         .title("Пряникиии")
                         .bean_name("Main Page")
                         .path_to_fxml("MainPageView.fxml")
+                        .make_resize_min()
+                        .min_dimension(640,480)
                         .build(),
                 "/com/example/pryanik/Main.css",
-                BeanContext.<ThemeEnum>get_bean("Theme").equals(ThemeEnum.DARK)?"/com/example/pryanik/DarkTheme.css":""
+                BeanContext.<ThemeEnum>get_bean("Theme").equals(ThemeEnum.DARK)?"/com/example/pryanik/DarkTheme.css":"",
+                BeanContext.get_bean("Theme").equals(ThemeEnum.DEFAULT)?"/com/example/pryanik/Main.css":""
         );
 
         ProjectFoundation.show_modal_window_for_inputting_mass();

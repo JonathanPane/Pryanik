@@ -24,7 +24,7 @@
     -fx-background-color: #121212;
 }
 .button{
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
     -fx-background-color: #121212;
 }
 .receipt-item-view {
@@ -40,7 +40,7 @@
     -fx-background-color: #212020;
 }
 .anchor-pane .label{
-    -fx-text-fill: white;
+    -fx-text-fill: #c7bfbf;
 }
 .scroll_pane{
     -fx-background-color: #121212;
@@ -66,11 +66,47 @@
 }
 #pryanik_name_printpreview{
     -fx-text-fill: #c7bfbf;
+
 }
 #print_button{
     -fx-border-color: #c7bfbf;
-    -fx-background-color: rgb(78, 77, 77);
+    -fx-background-color: #121212;
     -fx-text-fill: #c7bfbf;
 }
+#anchor_pane_greeting{
+    -fx-background-color: #121212;
+}
+#ok{
+    -fx-background-color: #121212;
+    -fx-text-fill: #c7bfbf;
+}
+#cancel{
+    -fx-background-color: #121212;
+    -fx-text-fill: #c7bfbf;
+}
+#file_label{
+    -fx-text-fill: #c7bfbf;
+}
+#label_greeting{
+    -fx-text-fill: #c7bfbf;
+}
+#text_field{
+    -fx-text-fill: #c7bfbf;
+    -fx-background-color: #121212;
+}
+#quantity{
+    -fx-text-fill: #c7bfbf;
+    -fx-background-color: #121212;
+}
+.table-view .scroll-bar * {
+        -fx-min-width: 0;
+        -fx-pref-width: 0;
+        -fx-max-width: 0;
+
+        -fx-min-height: 0;
+        -fx-pref-height: 0;
+        -fx-max-height: 0;
+}
+
 
 

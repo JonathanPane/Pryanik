@@ -8,6 +8,7 @@ import com.example.pryanik.enums.ThemeEnum;
 import com.example.pryanik.project.library.ProjectFoundation;
 import com.example.pryanik.project.library.StageConfiguration;
 import com.example.pryanik.services.FileIOService;
+import com.example.pryanik.services.ThemeSavingService;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -22,7 +23,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import javax.swing.text.DefaultEditorKit;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -124,7 +127,8 @@ public class MainPageController {
                 .show_and_wait()
                 .build(),
                 "/com/example/pryanik/Main.css",
-                BeanContext.<ThemeEnum>get_bean("Theme").equals(ThemeEnum.DARK)?"/com/example/pryanik/DarkTheme.css":""
+                BeanContext.<ThemeEnum>get_bean("Theme").equals(ThemeEnum.DARK)?"/com/example/pryanik/DarkTheme.css":"",
+                BeanContext.get_bean("Theme").equals(ThemeEnum.DEFAULT)?"/com/example/pryanik/Main.css":""
         );
     }
 
@@ -154,7 +158,8 @@ public class MainPageController {
     }
 
     @FXML
-    void pick_dark_theme() {
+    void pick_dark_theme() throws FileNotFoundException {
+        BeanContext.<Stage>get_bean("Main Page").getScene().getStylesheets().clear();
         BeanContext.<Stage>get_bean("Main Page")
                 .getScene()
                 .getStylesheets()
@@ -162,20 +167,22 @@ public class MainPageController {
                         Objects.requireNonNull(HelloApplication.class.getResource(ThemeEnum.DARK.path_to_css)).toExternalForm()
                 );
         BeanContext.set_value_in_bean("Theme", ThemeEnum.DARK);
+        ThemeSavingService.save_theme();
     }
+
+
 
     @FXML
-    void pick_lavender_theme() {
-
+    void pick_light_theme() throws FileNotFoundException {
+        BeanContext.<Stage>get_bean("Main Page").getScene().getStylesheets().clear();
+        BeanContext.<Stage>get_bean("Main Page")
+                .getScene()
+                .getStylesheets()
+                .add(
+                        Objects.requireNonNull(HelloApplication.class.getResource(ThemeEnum.DEFAULT.path_to_css)).toExternalForm()
+                );
+        BeanContext.set_value_in_bean("Theme", ThemeEnum.DEFAULT);
+        ThemeSavingService.save_theme();
     }
 
-    @FXML
-    void pick_light_theme() {
-
-    }
-
-    @FXML
-    void pick_spring_theme() {
-
-    }
 }
