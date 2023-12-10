@@ -43,9 +43,7 @@ public class ProjectFoundation {
     }
 
     public static void maximizeStageWindow(Stage stage){
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setHeight(primaryScreenBounds.getHeight());
-        stage.setWidth(primaryScreenBounds.getWidth());
+        stage.setMaximized(true);
     }
 
     public static void async(Runnable task){
@@ -57,7 +55,7 @@ public class ProjectFoundation {
     public static void show_modal_window_for_inputting_mass() throws IOException {
         ProjectFoundation.create_new_window_from_fxml(
                 StageConfiguration.builder()
-                        .title("Модальное окно")
+                        .title("Введите массу для перерасчета!")
                         .path_to_fxml("ModalWindow.fxml")
                         .bean_name("Modal Window Stage")
                         .show_and_wait()

@@ -68,7 +68,7 @@ public class ModalGreetingWindowController {
 
         ProjectFoundation.show_modal_window_for_inputting_mass();
 
-        //ProjectFoundation.maximizeStageWindow(BeanContext.get_bean("Main Page"));
+        ProjectFoundation.maximizeStageWindow(BeanContext.get_bean("Main Page"));
 
         BeanContext.<Stage>get_and_remove_bean("Modal Greeting Window").close();
     }

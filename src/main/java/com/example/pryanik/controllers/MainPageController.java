@@ -14,20 +14,23 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import javax.swing.text.DefaultEditorKit;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class MainPageController {
     private static FileChooser fileChooser;
@@ -39,6 +42,8 @@ public class MainPageController {
     private ScrollPane scroll_pane;
     @FXML
     private ToggleGroup metric;
+    @FXML
+    private MenuItem guide;
 
     @FXML
     private FlowPane receipt_output_content_pane;
@@ -158,7 +163,7 @@ public class MainPageController {
     }
 
     @FXML
-    void pick_dark_theme() throws FileNotFoundException {
+    void pick_dark_theme() throws IOException {
         BeanContext.<Stage>get_bean("Main Page").getScene().getStylesheets().clear();
         BeanContext.<Stage>get_bean("Main Page")
                 .getScene()
@@ -173,7 +178,7 @@ public class MainPageController {
 
 
     @FXML
-    void pick_light_theme() throws FileNotFoundException {
+    void pick_light_theme() throws IOException {
         BeanContext.<Stage>get_bean("Main Page").getScene().getStylesheets().clear();
         BeanContext.<Stage>get_bean("Main Page")
                 .getScene()
@@ -185,4 +190,22 @@ public class MainPageController {
         ThemeSavingService.save_theme();
     }
 
+    @FXML
+    void guide() throws IOException, URISyntaxException {
+        String Mydocs = new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
+        File file1 = new File(Mydocs + "/Pryanik");
+        if(!file1.exists())
+            file1.mkdirs();
+        File file = new File(Mydocs +"/Pryanik/Guide.rtf");
+        if(!file.exists()){
+            file.createNewFile();
+            PrintWriter printWriter = new PrintWriter(new FileOutputStream(file),true);
+            Scanner scanner = new Scanner(HelloApplication.class.getResourceAsStream("/Guide/Guide.rtf"));
+            while (scanner.hasNextLine())
+                printWriter.println(scanner.nextLine());
+            scanner.close();
+            printWriter.close();
+        }
+        Desktop.getDesktop().open(file);
+    }
 }
