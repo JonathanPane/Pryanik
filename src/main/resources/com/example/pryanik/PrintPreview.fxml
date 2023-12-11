@@ -35,10 +35,5 @@
             </TableColumn>
         </columns>
       </TableView>
-      <Label fx:id="pryanik_name_printpreview" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="14.0" prefHeight="27.0" prefWidth="270.0" text="Label" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="163.5" AnchorPane.rightAnchor="163.0">
-         <font>
-            <Font name="Times New Roman Bold" size="20.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

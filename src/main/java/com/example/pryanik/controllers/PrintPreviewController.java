@@ -26,8 +26,6 @@ public class PrintPreviewController {
     @FXML
     private TableColumn<ReceiptItem, String> name;
     @FXML
-    private Label pryanik_name_printpreview;
-    @FXML
     private ToggleGroup orientation;
     @FXML
     private TableColumn<PrintReceiptItemView, String> name_pryanik;

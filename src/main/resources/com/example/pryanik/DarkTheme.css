@@ -64,10 +64,7 @@
 #amount{
     -fx-text-fill: #c7bfbf;
 }
-#pryanik_name_printpreview{
-    -fx-text-fill: #c7bfbf;
 
-}
 #print_button{
     -fx-border-color: #c7bfbf;
     -fx-background-color: #121212;
