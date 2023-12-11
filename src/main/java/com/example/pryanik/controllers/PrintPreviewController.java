@@ -3,6 +3,7 @@ package com.example.pryanik.controllers;
 import com.example.pryanik.BeanContext;
 import com.example.pryanik.DTO.ReceiptItem;
 import com.example.pryanik.UI.PrintReceiptItemView;
+import com.example.pryanik.UI.ReceiptItemView;
 import javafx.fxml.FXML;
 import javafx.print.*;
 import javafx.scene.control.*;
@@ -28,6 +29,8 @@ public class PrintPreviewController {
     private Label pryanik_name_printpreview;
     @FXML
     private ToggleGroup orientation;
+    @FXML
+    private TableColumn<PrintReceiptItemView, String> name_pryanik;
 
     @FXML
     private Spinner<Integer> quantity;
@@ -42,7 +45,7 @@ public class PrintPreviewController {
 
     @FXML
     void initialize(){
-        pryanik_name_printpreview.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt",
+        name_pryanik.setText(new File(BeanContext.<String>get_bean("path to file")).getName().replace(".receipt",
                 ""));
         mass.setCellValueFactory(new PropertyValueFactory<>("amount"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));

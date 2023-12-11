@@ -27,8 +27,12 @@
       <RadioButton fx:id="landscape" layoutX="382.0" layoutY="466.0" mnemonicParsing="false" onAction="#toggle_landscape" text="Альбомная" toggleGroup="$orientation" AnchorPane.bottomAnchor="67.0" />
       <TableView fx:id="text_field_tableview" layoutX="82.0" layoutY="124.0" prefHeight="445.0" prefWidth="315.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
         <columns>
-          <TableColumn fx:id="name" prefWidth="200.0" resizable="false" text="Ингридиенты" />
-          <TableColumn fx:id="mass" prefWidth="114.0" resizable="false" text="Масса" />
+            <TableColumn fx:id="name_pryanik" editable="false" prefWidth="75.0" text="name">
+               <columns>
+                <TableColumn fx:id="name" prefWidth="200.0" resizable="false" text="Ингридиенты" />
+                <TableColumn fx:id="mass" prefWidth="114.0" resizable="false" text="Масса" />
+               </columns>
+            </TableColumn>
         </columns>
       </TableView>
       <Label fx:id="pryanik_name_printpreview" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="14.0" prefHeight="27.0" prefWidth="270.0" text="Label" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="163.5" AnchorPane.rightAnchor="163.0">
